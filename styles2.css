@@ -1,0 +1,171 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+body {
+  font-family: 'Inter', sans-serif;
+}
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+header {
+  background-color: #0f172a;
+  color: white;
+  padding: 1rem 0;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+header .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+header h1 {
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+header nav ul {
+  display: flex;
+  gap: 1.5rem;
+}
+header nav a {
+  color: white;
+  font-weight: 500;
+  transition: color 0.3s;
+}
+header nav a:hover {
+  color: #93c5fd;
+}
+section {
+  padding: 4rem 0;
+}
+.hero {
+  background-color: #1e3a8a;
+  color: white;
+  text-align: center;
+}
+.hero h2 {
+  font-size: 3rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+.hero p {
+  font-size: 1.2rem;
+  max-width: 600px;
+  margin: 0 auto 2rem;
+}
+.btn {
+  background-color: #60a5fa;
+  color: white;
+  padding: 0.75rem 2rem;
+  border-radius: 9999px;
+  font-weight: 600;
+  transition: background-color 0.3s, transform 0.2s;
+  display: inline-block;
+}
+.btn:hover {
+  background-color: #3b82f6;
+  transform: translateY(-2px);
+}
+.features, .how-it-works, .contact {
+  background-color: #f1f5f9;
+  text-align: center;
+}
+.features .container h2, .how-it-works h2, .contact h2, .demo h2 {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 2rem;
+}
+.feature-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  text-align: left;
+}
+.feature {
+  background-color: white;
+  padding: 2rem;
+  border-radius: 1rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s;
+}
+.feature:hover {
+  transform: translateY(-5px);
+}
+.feature h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+.feature p {
+  color: #64748b;
+}
+.how-it-works ol {
+  list-style-type: none;
+  counter-reset: my-counter;
+  text-align: left;
+  max-width: 600px;
+  margin: 0 auto;
+}
+.how-it-works li {
+  counter-increment: my-counter;
+  padding-left: 2rem;
+  position: relative;
+  margin-bottom: 1.5rem;
+  color: #334155;
+}
+.how-it-works li::before {
+  content: counter(my-counter);
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 1.5rem;
+  height: 1.5rem;
+  background-color: #60a5fa;
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 700;
+}
+.demo {
+  background-color: #e2e8f0;
+  text-align: center;
+}
+.demo .form-container {
+  max-width: 600px;
+  margin: 0 auto;
+  background-color: white;
+  padding: 2rem;
+  border-radius: 1rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.file-input-label {
+  background-color: #f8fafc;
+  border: 2px dashed #cbd5e1;
+  border-radius: 0.5rem;
+  padding: 2rem;
+  cursor: pointer;
+  transition: background-color 0.3s, border-color 0.3s;
+}
+.file-input-label:hover {
+  background-color: #f1f5f9;
+  border-color: #3b82f6;
+}
+.hidden {
+  display: none;
+}
+.result-item {
+  padding: 0.75rem 1rem;
+  background-color: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.5rem;
+}
+footer {
+  background-color: #0f172a;
+  color: white;
+  text-align: center;
+  padding: 1.5rem 0;
+}

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>STRAWHAT'S BPA Breed AI - Cattle Breed Identifier</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="styles2.css">
+</head>
+<body>
+
+  <header>
+    <div class="container">
+      <h1>STRAWHAT'S BPA Breed AI</h1>
+      <nav>
+        <ul>
+          <li><a href="#features">Features</a></li>
+          <li><a href="#how-it-works">How It Works</a></li>
+          <li><a href="#demo">Demo</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="container">
+      <h2>AI-Powered Breed Identification for Dairy Animals</h2>
+      <p>Empowering FLWs with real-time, accurate cattle & buffalo breed recognition using AI and image-based tools.</p>
+      <a href="#demo" class="btn">Try Demo</a>
+    </div>
+  </section>
+
+  <section id="features" class="features">
+    <div class="container">
+      <h2>Key Features</h2>
+      <div class="feature-list">
+        <div class="feature">
+          <h3>Image-Based Recognition</h3>
+          <p>Snap a photo and get instant breed suggestions.</p>
+        </div>
+        <div class="feature">
+          <h3>AI-Powered Accuracy</h3>
+          <p>Trained on thousands of labeled animal images across India.</p>
+        </div>
+        <div class="feature">
+          <h3>BPA Integration</h3>
+          <p>Directly connects with Bharat Pashudhan App workflows.</p>
+        </div>
+        <div class="feature">
+          <h3>Wide Breed Coverage</h3>
+          <p>Supports over 50 indigenous and crossbred species.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="how-it-works" class="how-it-works">
+    <div class="container">
+      <h2>How It Works</h2>
+      <ol>
+        <li>Take a clear photo of the animal using the app</li>
+        <li>AI analyzes image features like body, horns, and color</li>
+        <li>Top 3 breed matches are suggested</li>
+        <li>FLW selects or confirms breed for registration</li>
+        <li>Data is synced with the BPA database</li>
+      </ol>
+    </div>
+  </section>
+
+  <section id="demo" class="demo">
+    <div class="container">
+      <h2>Try the Breed Identification Demo</h2>
+      <p>Upload animal images to simulate breed prediction.</p>
+      <div class="form-container">
+        <form id="uploadForm">
+          <div class="mb-4">
+            <label for="fileInput" class="file-input-label block">
+              <div class="text-center text-gray-500">
+                <svg xmlns="http://www.w3.org/2000/svg" class="mx-auto h-12 w-12 text-gray-400 mb-2" viewBox="0 0 20 20" fill="currentColor">
+                  <path d="M5.5 13a.5.5 0 01.5-.5h8a.5.5 0 010 1h-8a.5.5 0 01-.5-.5zM5.5 16a.5.5 0 01.5-.5h8a.5.5 0 010 1h-8a.5.5 0 01-.5-.5z" />
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm-1.5-3.5a.5.5 0 01-.5-.5v-4.5a.5.5 0 01.5-.5h2a.5.5 0 01.5.5v4.5a.5.5 0 01-.5.5h-2z" clip-rule="evenodd" />
+                </svg>
+                <p>Click here or drag & drop files</p>
+                <p id="fileCountText" class="text-sm mt-1"></p>
+              </div>
+            </label>
+            <input type="file" id="fileInput" name="files" class="hidden" multiple accept="image/*" />
+          </div>
+          <button type="submit" id="submitBtn" class="w-full bg-blue-600 text-white py-2 px-4 rounded-full font-semibold transition-transform duration-200 transform active:scale-95">
+            Identify Breed
+          </button>
+        </form>
+        <div id="loadingIndicator" class="mt-4 text-center hidden">
+          <div class="flex items-center justify-center space-x-2">
+            <div class="w-4 h-4 rounded-full bg-blue-500 animate-bounce"></div>
+            <div class="w-4 h-4 rounded-full bg-blue-500 animate-bounce delay-150"></div>
+            <div class="w-4 h-4 rounded-full bg-blue-500 animate-bounce delay-300"></div>
+          </div>
+        </div>
+        <div id="result" class="mt-6 hidden">
+          <h3 class="text-lg font-semibold mb-2 text-gray-700">Prediction Results:</h3>
+          <ul id="resultsList" class="space-y-2"></ul>
+        </div>
+        <div id="error" class="mt-4 text-red-500 font-medium hidden"></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="contact">
+    <div class="container">
+      <h2>Contact Us</h2>
+      <p>Email: SS@strawhat.in</p>
+      <p>Phone: 1800-xxx-xxx</p>
+      <p>Government Portal: <a href="https://example.gov.in" target="_blank" class="text-blue-600 hover:underline">example.gov.in</a></p>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <p>&copy; 2025 BPA Breed AI Project</p>
+    </div>
+  </footer>
+
+  <script src="script2.js"></script>
+</body>
+</html>
