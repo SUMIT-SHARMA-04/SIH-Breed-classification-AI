@@ -40,7 +40,7 @@ form.addEventListener('submit', async (e) => {
 
   // Placeholder for your API endpoint. Replace with your actual URL.
   // e.g., 'https://your-api-domain.com/predict'
-  const API_URL = '/predict';
+  const API_URL = 'http://127.0.0.1:8000/predict';
 
   try {
     const response = await fetch(API_URL, {
