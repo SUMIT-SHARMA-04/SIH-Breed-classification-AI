@@ -40,6 +40,4 @@ def predict_breed_from_folder(folder_path, target_size=(300, 300)):
 
     return list(zip(top_classes, top_scores))
 
-results = predict_breed_from_folder("breed2")
-print(results)
 
