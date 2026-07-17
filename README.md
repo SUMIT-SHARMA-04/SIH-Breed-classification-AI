@@ -1,97 +1,90 @@
-# 🐄 AI-Powered Livestock Breed Classifier
+# AI-Powered Breed Classifier (STRAWHAT BPA)
 
-![SIH Badge](https://img.shields.io/badge/Smart_India_Hackathon-Project-orange?style=for-the-badge)
-![Python](https://img.shields.io/badge/Python-3.8%2B-blue?style=for-the-badge&logo=python)
-![Django](https://img.shields.io/badge/Django-Full_Stack-092E20?style=for-the-badge&logo=django)
-![Deep Learning](https://img.shields.io/badge/Deep_Learning-CNN-red?style=for-the-badge)
-
-## 📌 Project Overview
-Developed for the **Smart India Hackathon (SIH)**, this repository hosts a full-stack web application designed for the accurate, image-based classification of diverse Indian livestock breeds. 
-
-Currently, breed registration relies heavily on manual entry, which is prone to human error and data inconsistencies. This system digitizes and standardizes the identification process. By providing field workers with an intuitive interface to upload images and receive instant, AI-driven predictions, this tool improves data integrity crucial for genetic improvement and national conservation programs.
+An enterprise-grade, Progressive Web App (PWA) designed for frontline agricultural workers. This system utilizes a fine-tuned EfficientNetB3 neural network to classify over 29 indigenous Indian cattle and buffalo breeds in real-time.
 
 ## ✨ Key Features
-* **Instant Breed Identification:** Upload an image of a bovine and receive real-time classification results.
-* **High-Accuracy DL Model:** Leverages a Convolutional Neural Network (CNN) with Transfer Learning (ResNet/MobileNet) fine-tuned specifically for Indian bovine breeds.
-* **User-Friendly Interface:** A responsive, accessible web frontend designed for field workers operating in varied environments.
-* **Standardized Data Collection:** Automatically logs predictions to a centralized database, minimizing manual data entry errors.
+* **Real-Time AI Inference:** Identifies dairy breeds instantly using a custom Keras model.
+* **WebRTC Camera Integration:** Take photos directly from your device camera without leaving the browser.
+* **Batch Processing:** Upload multiple gallery images at once for rapid herd analysis.
+* **Secure Authentication:** JWT-based login system for frontline workers.
+* **Cloud Sync & History:** Automatically saves prediction history to a local SQLite database.
+* **CSV Data Export:** Download analysis reports directly to CSV for database syncing.
 
 ## 🛠️ Technology Stack
-* **Frontend:** HTML5, CSS3, JavaScript, Bootstrap/Tailwind (for responsive design)
-* **Backend:** Django (Python Web Framework)
-* **Machine Learning:** TensorFlow / Keras (or PyTorch), OpenCV, NumPy, Pandas
-* **Model Architecture:** Convolutional Neural Network (CNN) utilizing Transfer Learning
-* **Database:** SQLite (Development) / PostgreSQL (Production)
+* **Frontend:** React.js, Vite, Custom CSS (Glassmorphism UI), HTML5 WebRTC.
+* **Backend:** Python, FastAPI, SQLAlchemy, SlowAPI (Rate Limiting), JWT (Jose).
+* **Machine Learning:** TensorFlow/Keras, NumPy, Pillow (PIL).
 
-## 🧠 Core Model Technology
-The prediction engine uses state-of-the-art Deep Learning techniques to achieve fine-grained classification:
-1. **Preprocessing:** Images are standardized, resized, and augmented to handle varied lighting and angles common in field photography.
-2. **Transfer Learning:** We utilize pre-trained base models (such as ResNet50 or MobileNetV2) to extract complex feature representations, drastically reducing training time while boosting accuracy on our specific livestock dataset.
-3. **Inference Pipeline:** The trained weights are loaded into the Django backend, where incoming images are processed and passed through the model to return the highest-confidence breed prediction.
+---
 
-## 🚀 Setup & Installation
+## 📂 Project Structure
+Ensure your project directory looks like this before starting:
 
-### Prerequisites
-* Python 3.8 or higher
-* Git
+```text
+📁 Breed-Classifier-Project/
+│
+├── 📁 backend/
+│   ├── main.py
+│   ├── best_model.keras    <-- MUST be placed here!
+│   └── bpa_data.db         <-- Auto-generated after first run
+│
+└── 📁 frontend/
+    ├── package.json
+    ├── index.html
+    └── 📁 src/
+        ├── App.jsx
+        ├── App.css
+        └── main.jsx
 
-### Local Development Setup
-1. **Clone the repository:**
-   ```bash
-   git clone [https://github.com/yourusername/livestock-breed-classifier.git](https://github.com/yourusername/livestock-breed-classifier.git)
-   cd livestock-breed-classifier
+
+🚀 Installation & Setup Guide
+Prerequisites
+Python (v3.9 - v3.11 recommended)
+
+Node.js (LTS version)
+
+1. Backend Setup (FastAPI & Machine Learning)
+Open your terminal and navigate to the backend folder.
+
 Create and activate a virtual environment:
+# Windows
 python -m venv venv
-# On Windows:
 venv\Scripts\activate
-# On macOS/Linux:
+
+# Mac/Linux
+python3 -m venv venv
 source venv/bin/activate
-Install the required dependencies:
 
-Bash
-pip install -r requirements.txt
-Download the pre-trained model weights:
+Install dependencies:
+pip install fastapi uvicorn[standard] python-multipart sqlalchemy passlib[bcrypt] python-jose[cryptography] slowapi tensorflow-cpu Pillow numpy
 
-Place your trained .h5 or .pt model file inside the designated directory (e.g., model_assets/). Note: Model files are often too large for GitHub and should be downloaded via a release link.
+Start the Backend Server:
+uvicorn main:app --reload
+The backend API will be available at http://127.0.0.1:8000
 
-Run database migrations:
+2. Frontend Setup (React & Vite)
+Open a new, separate terminal and navigate to your frontend folder.
 
-Bash
-python manage.py makemigrations
-python manage.py migrate
-Start the development server:
+Install Node dependencies:
 
-Bash
-python manage.py runserver
-The application will now be running at http://127.0.0.1:8000/.
+npm install
 
-💻 Usage
-Navigate to the homepage on your local browser.
+The frontend interface will be available at http://localhost:5173 (or the port specified in your terminal).
 
-Click on the "Upload Image" section.
+💻 Usage Instructions
+Access the App: Open your browser and go to the frontend URL (e.g., http://localhost:5173).
 
-Select a clear photo of the livestock.
+Create a User (Dev Mode): To use the History features, you need an account. Since the app is in development, you can create a user by sending a POST request to http://127.0.0.1:8000/dev/create_user with a username and password via Postman or Swagger UI (http://127.0.0.1:8000/docs).
 
-Click "Analyze". The system will process the image and display the predicted breed along with a confidence score.
+Login: Click "Account Login" in the navbar and enter your credentials.
 
-Authorized users can save the result directly to the unified registry.
+Analyze: Click "Use Live Camera" to snap a photo, or drag-and-drop files into the upload zone. Click "Analyze with AI".
 
-🔮 Future Scope
-Offline Functionality: Transitioning the web app to a Progressive Web App (PWA) to allow field workers to capture data without an active internet connection, syncing once back online.
+Export: Once results appear, click "Download CSV" to export your data.
 
-Expanded Database: Continuously training the model with new data to include rare and region-specific breeds.
+⚠️ Important Notes
+File Limits: The backend enforces a strict 5MB maximum limit per image.
 
-Health Analytics: Integrating secondary models to detect visible signs of common skin diseases or nutritional deficiencies from the uploaded images.
+Rate Limiting: To prevent server overload, the API is limited to 5 prediction requests per minute per IP address.
 
-🤝 Contributing
-Contributions are welcome! If you'd like to improve the model accuracy, enhance the Django backend, or refine the UI:
-
-Fork the repository.
-
-Create your feature branch (git checkout -b feature/AmazingFeature).
-
-Commit your changes (git commit -m 'Add some AmazingFeature').
-
-Push to the branch (git push origin feature/AmazingFeature).
-
-Open a Pull Request.
+Model Missing Error: If the backend throws a 503 Service Unavailable, ensure your best_model.keras file is in the exact same directory as your main.py file.
