@@ -1,0 +1,10 @@
+fastapi
+uvicorn[standard]
+python-multipart
+SQLAlchemy
+passlib[bcrypt]
+python-jose[cryptography]
+slowapi
+tensorflow-cpu
+Pillow
+numpy

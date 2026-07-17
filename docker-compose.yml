@@ -1,0 +1,34 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:15-alpine
+    container_name: bpa_postgres
+    restart: always
+    environment:
+      POSTGRES_USER: bpa_admin
+      POSTGRES_PASSWORD: secure_password_here
+      POSTGRES_DB: bpa_database
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  api:
+    build: .
+    container_name: bpa_fastapi
+    restart: always
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+    environment:
+      - DATABASE_URL=postgresql://bpa_admin:secure_password_here@db:5432/bpa_database
+      - SECRET_KEY=generate_a_random_secure_hex_key_here
+      - ALLOWED_ORIGINS=http://localhost:5173,http://localhost:3000
+    volumes:
+      # Mount the local directory to access the .keras model without rebuilding
+      - .:/app 
+
+volumes:
+  pgdata:
