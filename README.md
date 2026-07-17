@@ -1,52 +1,57 @@
-# AI-Powered Breed Classifier (STRAWHAT BPA)
+# 🐄 AI-Powered Breed Classifier
 
-An enterprise-grade, Progressive Web App (PWA) designed for frontline agricultural workers. This system utilizes a fine-tuned EfficientNetB3 neural network to classify over 29 indigenous Indian cattle and buffalo breeds in real-time.
+![Python](https://img.shields.io/badge/Python-3.9%2B-blue?logo=python&logoColor=white)
+![FastAPI](https://img.shields.io/badge/FastAPI-0.100%2B-009688?logo=fastapi&logoColor=white)
+![TensorFlow](https://img.shields.io/badge/TensorFlow-CPU-FF6F00?logo=tensorflow&logoColor=white)
+![React](https://img.shields.io/badge/React-18.x-61DAFB?logo=react&logoColor=black)
+![Vite](https://img.shields.io/badge/Vite-4.x-646CFF?logo=vite&logoColor=white)
+
+An enterprise-grade, Progressive Web App (PWA) designed for Frontline Workers (FLWs) to instantly identify cattle and buffalo breeds using advanced computer vision. Built with a **React + Vite** frontend and a **FastAPI** backend, powered by a highly accurate **EfficientNetB3** neural network.
+
+---
 
 ## ✨ Key Features
-* **Real-Time AI Inference:** Identifies dairy breeds instantly using a custom Keras model.
-* **WebRTC Camera Integration:** Take photos directly from your device camera without leaving the browser.
-* **Batch Processing:** Upload multiple gallery images at once for rapid herd analysis.
-* **Secure Authentication:** JWT-based login system for frontline workers.
-* **Cloud Sync & History:** Automatically saves prediction history to a local SQLite database.
-* **CSV Data Export:** Download analysis reports directly to CSV for database syncing.
 
-## 🛠️ Technology Stack
-* **Frontend:** React.js, Vite, Custom CSS (Glassmorphism UI), HTML5 WebRTC.
-* **Backend:** Python, FastAPI, SQLAlchemy, SlowAPI (Rate Limiting), JWT (Jose).
-* **Machine Learning:** TensorFlow/Keras, NumPy, Pillow (PIL).
+* **High-Accuracy AI Inference:** Predicts 50+ indigenous dairy breeds using a fine-tuned EfficientNet deep learning model.
+* **Native WebRTC Camera:** Directly capture animal photos using mobile or desktop device cameras within the browser.
+* **Batch Processing:** Upload multiple images simultaneously. The frontend handles client-side image compression to bypass heavy bandwidth usage and API limits.
+* **Secure Data Syncing:** JSON Web Token (JWT) authentication allows workers to securely log in, save historical prediction data, and track past inferences.
+* **CSV Export:** Instantly download prediction reports (Filename, Breed, Confidence Score) into a CSV format for spreadsheet or database logging.
+* **Glassmorphism UI:** A stunning, fully responsive interface featuring fluid mesh-gradient backgrounds and hardware-accelerated CSS animations.
 
 ---
 
 ## 📂 Project Structure
-Ensure your project directory looks like this before starting:
 
 ```text
 📁 Breed-Classifier-Project/
 │
 ├── 📁 backend/
-│   ├── main.py
-│   ├── best_model.keras    <-- MUST be placed here!
-│   └── bpa_data.db         <-- Auto-generated after first run
+│   ├── main.py                 # FastAPI server, endpoints, and ML routing
+│   ├── best_model.keras        # Compiled ML model (Requires manual placement)
+│   └── bpa_data.db             # Auto-generated SQLite database for history
 │
 └── 📁 frontend/
-    ├── package.json
-    ├── index.html
+    ├── package.json            # Node dependencies
+    ├── vite.config.js          # Vite configuration
+    ├── index.html              # Entry HTML file
     └── 📁 src/
-        ├── App.jsx
-        ├── App.css
-        └── main.jsx
+        ├── App.jsx             # Main React application component
+        └── App.css             # UI styling and animations
 
-
-🚀 Installation & Setup Guide
+🚀 Installation & Setup
 Prerequisites
-Python (v3.9 - v3.11 recommended)
+Python 3.9 to 3.11 (Do not use Python 3.12+ to ensure TensorFlow compatibility).
 
-Node.js (LTS version)
+Node.js (LTS Version).
 
-1. Backend Setup (FastAPI & Machine Learning)
-Open your terminal and navigate to the backend folder.
+Machine Learning Model: Ensure your trained best_model.keras file is placed directly inside the backend/ folder.
 
-Create and activate a virtual environment:
+1. Backend Setup (FastAPI)
+Open a terminal and navigate to the backend/ directory.
+
+A. Create and activate a virtual environment:
+
 # Windows
 python -m venv venv
 venv\Scripts\activate
@@ -55,36 +60,32 @@ venv\Scripts\activate
 python3 -m venv venv
 source venv/bin/activate
 
-Install dependencies:
+B. Install dependencies:
+(Note: We use tensorflow-cpu for lightweight local inference)
+
 pip install fastapi uvicorn[standard] python-multipart sqlalchemy passlib[bcrypt] python-jose[cryptography] slowapi tensorflow-cpu Pillow numpy
 
-Start the Backend Server:
+C. Start the server:
 uvicorn main:app --reload
-The backend API will be available at http://127.0.0.1:8000
 
-2. Frontend Setup (React & Vite)
-Open a new, separate terminal and navigate to your frontend folder.
+The backend API will now be accessible at http://127.0.0.1:8000.
 
-Install Node dependencies:
+2. Frontend Setup (React/Vite)
+Open a new, separate terminal and navigate to the frontend/ directory.
 
+A. Install Node modules:
 npm install
 
-The frontend interface will be available at http://localhost:5173 (or the port specified in your terminal).
+B. Start the development server:
+npm run dev
 
-💻 Usage Instructions
-Access the App: Open your browser and go to the frontend URL (e.g., http://localhost:5173).
+The web application will now be accessible at http://localhost:5173.
 
-Create a User (Dev Mode): To use the History features, you need an account. Since the app is in development, you can create a user by sending a POST request to http://127.0.0.1:8000/dev/create_user with a username and password via Postman or Swagger UI (http://127.0.0.1:8000/docs).
+📡 API Endpoints OverviewMethodEndpointDescriptionAuth RequiredPOST/predictUpload batch images and return breed confidence scores.OptionalPOST/tokenExchange username/password for a JWT access token.NoGET/historyRetrieve saved historical predictions for the logged-in user.YesPOST/dev/create_userUtility endpoint to create a test user in the database.No
 
-Login: Click "Account Login" in the navbar and enter your credentials.
+⚠️ Important NotesFile Upload Limits: The backend enforces a strict 5MB per-file limit. The frontend mitigates this by applying intelligent client-side canvas compression prior to dispatch.
+Rate Limiting: The /predict endpoint uses SlowAPI to restrict users to 5 requests per minute per IP to prevent server overloading.
 
-Analyze: Click "Use Live Camera" to snap a photo, or drag-and-drop files into the upload zone. Click "Analyze with AI".
+Database: SQLAlchemy handles database generation. A bpa_data.db file will automatically be created in the backend folder upon first execution.
 
-Export: Once results appear, click "Download CSV" to export your data.
-
-⚠️ Important Notes
-File Limits: The backend enforces a strict 5MB maximum limit per image.
-
-Rate Limiting: To prevent server overload, the API is limited to 5 prediction requests per minute per IP address.
-
-Model Missing Error: If the backend throws a 503 Service Unavailable, ensure your best_model.keras file is in the exact same directory as your main.py file.
+Developed for the STRAWHAT BPA Initiative.
