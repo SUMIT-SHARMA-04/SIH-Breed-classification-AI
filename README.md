@@ -38,54 +38,15 @@ An enterprise-grade, Progressive Web App (PWA) designed for Frontline Workers (F
     └── 📁 src/
         ├── App.jsx             # Main React application component
         └── App.css             # UI styling and animations
-
-🚀 Installation & Setup
-Prerequisites
-Python 3.9 to 3.11 (Do not use Python 3.12+ to ensure TensorFlow compatibility).
-
-Node.js (LTS Version).
-
-Machine Learning Model: Ensure your trained best_model.keras file is placed directly inside the backend/ folder.
-
-1. Backend Setup (FastAPI)
-Open a terminal and navigate to the backend/ directory.
-
-A. Create and activate a virtual environment:
-
-# Windows
+🚀 Installation & SetupPrerequisitesPython 3.9 to 3.11 (Do not use Python 3.12+ to ensure TensorFlow compatibility).Node.js (LTS Version).Machine Learning Model: Ensure your trained best_model.keras file is placed directly inside the backend/ folder.1. Backend Setup (FastAPI)Open a terminal and navigate to the backend/ directory.A. Create and activate a virtual environment:Bash# Windows
 python -m venv venv
 venv\Scripts\activate
 
 # Mac/Linux
 python3 -m venv venv
 source venv/bin/activate
-
-B. Install dependencies:
-(Note: We use tensorflow-cpu for lightweight local inference)
-
-pip install fastapi uvicorn[standard] python-multipart sqlalchemy passlib[bcrypt] python-jose[cryptography] slowapi tensorflow-cpu Pillow numpy
-
-C. Start the server:
-uvicorn main:app --reload
-
-The backend API will now be accessible at http://127.0.0.1:8000.
-
-2. Frontend Setup (React/Vite)
-Open a new, separate terminal and navigate to the frontend/ directory.
-
-A. Install Node modules:
-npm install
-
-B. Start the development server:
-npm run dev
-
-The web application will now be accessible at http://localhost:5173.
-
-📡 API Endpoints OverviewMethodEndpointDescriptionAuth RequiredPOST/predictUpload batch images and return breed confidence scores.OptionalPOST/tokenExchange username/password for a JWT access token.NoGET/historyRetrieve saved historical predictions for the logged-in user.YesPOST/dev/create_userUtility endpoint to create a test user in the database.No
-
-⚠️ Important NotesFile Upload Limits: The backend enforces a strict 5MB per-file limit. The frontend mitigates this by applying intelligent client-side canvas compression prior to dispatch.
-Rate Limiting: The /predict endpoint uses SlowAPI to restrict users to 5 requests per minute per IP to prevent server overloading.
-
-Database: SQLAlchemy handles database generation. A bpa_data.db file will automatically be created in the backend folder upon first execution.
-
-Developed for the STRAWHAT BPA Initiative.
+B. Install dependencies:(Note: We use tensorflow-cpu for lightweight local inference, which works perfectly for AMD GPUs and systems without NVIDIA CUDA cores).Bashpip install fastapi uvicorn[standard] python-multipart sqlalchemy passlib[bcrypt] python-jose[cryptography] slowapi tensorflow-cpu Pillow numpy
+C. Start the server:Bashuvicorn main:app --reload
+The backend API will now be accessible at http://127.0.0.1:8000.2. Frontend Setup (React/Vite)Open a new, separate terminal and navigate to the frontend/ directory.A. Install Node modules:Bashnpm install
+B. Start the development server:Bashnpm run dev
+The web application will now be accessible at http://localhost:5173.📡 API Endpoints OverviewMethodEndpointDescriptionAuth RequiredPOST/predictUpload batch images and return breed confidence scores.OptionalPOST/tokenExchange username/password for a JWT access token.NoGET/historyRetrieve saved historical predictions for the logged-in user.YesPOST/dev/create_userUtility endpoint to create a test user in the database.No⚠️ Important NotesFile Upload Limits: The backend enforces a strict 5MB per-file limit. The frontend mitigates this by applying intelligent client-side canvas compression prior to dispatch.Rate Limiting: The /predict endpoint uses SlowAPI to restrict users to 5 requests per minute per IP to prevent server overloading.Database: SQLAlchemy handles database generation. A bpa_data.db file will automatically be created in the backend folder upon first execution.Developed for the STRAWHAT BPA Initiative.
